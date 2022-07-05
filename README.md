@@ -10,7 +10,7 @@
 
 ### **_Description_**
 
-## Who doesnt love the cassic arcade game Tetris?! We will play thegame that has been brought down from generations to generations.
+## Who doesn't love the classic arcade game Tetris?! We will play the game that has been brought down from generations to generations.
 
 ### **_Technologies Used_**
 
