@@ -28,7 +28,7 @@ Rules:
 - Use the controls for move block peices laterally while they are falling to the ground.
   - You can rotate the peices as you see "fit."
 - Completing rows to increase your score and keep your pile down.
-  - Failure to do so results in came over and you can try again.
+  - Failure to do so results in game over and you can try again.
 
 ---
 

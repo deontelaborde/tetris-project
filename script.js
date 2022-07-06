@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [1, width, width + 1, width + 2],
     [1, width + 1, width + 2, width * 2 + 1],
     [width, width + 1, width + 2, width * 2 + 1],
-    [1, width + 1, width, width * 2 + 1]
+    [1, width, width + 1, width * 2 + 1]
   ]
   const zPiece = [
     [0, width, width + 1, width * 2 + 1],
@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
 
   const zFlippedPiece = [
-    [1, width + 1, width, width * 2],
+    [1, width, width + 1, width * 2],
     [width, width + 1, width * 2 + 1, width * 2 + 2],
-    [1, width + 1, width, width * 2],
+    [1, width, width + 1, width * 2],
     [width, width + 1, width * 2 + 1, width * 2 + 2]
   ]
 
@@ -82,7 +82,38 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[currentPosition + index].classList.remove('piece')
     })
   }
-  // Movement down the table
+  // Falling down the board
+  fallingSpeed = setInterval(moveDown, 1000)
+
+  function moveDown() {
+    undraw()
+    currentPosition += width
+    draw()
+    stopFalling()
+  }
+
+  function stopFalling() {
+    if (
+      currentpiece.some((index) =>
+        squares[currentPosition + index + width].classList.contains('taken')
+      )
+    ) {
+      currentpiece.forEach((index) =>
+        squares[currentPosition + index].classList.add('taken')
+      )
+      random = Math.floor(Math.random() * gamePieces.length)
+      currentpiece = gamePieces[random][currentRotation]
+      currentPosition = 4
+      draw()
+    }
+  }
+
+  random = Math.floor(Math.random() * gamePieces.length)
+  currentpiece = gamePieces[random][currentRotation]
+  currentPosition = 4
+  draw()
+  console.log(currentpiece)
+  // Lateral movement down the board
 
   // Rotating Pieces
 
