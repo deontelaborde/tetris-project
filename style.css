@@ -1,3 +1,8 @@
+.container {
+  display: flex;
+}
+
+
 .game-board {
   display: flex;
   flex-wrap: wrap;
@@ -14,4 +19,22 @@ height: 30px;
 
 .piece {
   background-color: green;
+}
+
+section {
+display: flex;
+
+}
+
+.game-info{
+
+margin-left: 120px;
+}
+#next-peice {
+  
+  height: 120px;
+  width: 120px;
+  flex-wrap: wrap;
+  display: flex;
+  background-color: red;
 }

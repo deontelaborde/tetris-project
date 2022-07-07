@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentRotation = 0
     }
     currentpiece = gamePieces[random][currentRotation]
+    draw()
   }
 
   // Show the upcoming piece
