@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let squares = Array.from(document.querySelectorAll('.game-board div'))
   const width = 10
   let nextRandom = 0
+  let score = 0
 
   // Piece (L,L(flipped),T,Z,Z(flipped),I,O)
   //Rotation 1
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentPosition = 4
       draw()
       displayPreview()
+      addScore()
     }
   }
   // Lateral movement down the board
@@ -179,9 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Show the upcoming piece
 
-  const displayNextPiece = document.querySelectorAll('#next-piece div')
+  const displayNextPiece = document.querySelectorAll('.next-piece div')
   const displayWidth = 4
-  let displayIndex = 0
+  const displayIndex = 0
 
   const upNextPieces = [
     [1, displayWidth + 1, displayWidth * 2 + 1, 2], //l piece
@@ -205,9 +207,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Increase Score
   const scoreDisplay = document.querySelector('#score')
-  // Increase speed gradually with every level increase
-  const levelDisplay = document.querySelector('#level')
-  // End game when column is full
+  function addScore() {
+    for (let i = 0; i < 199; i += width) {
+      const row = [
+        i,
+        i + 1,
+        i + 2,
+        i + 3,
+        i + 4,
+        i + 5,
+        i + 6,
+        i + 7,
+        i + 8,
+        i + 9
+      ]
 
-  //  Click Play Again to Start Over
+      if (row.every((index) => squares[index].classList.contains('taken'))) {
+        score += 10
+        scoreDisplay.innerHTML = score
+        
+    }
+
+    // Increase speed gradually with every level increase
+    const levelDisplay = document.querySelector('#level')
+    // End game when column is full
+
+    //  Click Play Again to Start Over
+  }
 })

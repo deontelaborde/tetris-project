@@ -17,7 +17,7 @@ height: 30px;
 
 }
 
-.piece {
+.piece, .next-piece .piece{
   background-color: green;
 }
 
@@ -30,11 +30,11 @@ display: flex;
 
 margin-left: 120px;
 }
-#next-peice {
+.next-piece {
   
   height: 120px;
   width: 120px;
   flex-wrap: wrap;
   display: flex;
-  background-color: red;
+  background-color: blue;
 }
