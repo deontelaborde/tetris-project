@@ -4,19 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
   let squares = Array.from(document.querySelectorAll('.game-board div'))
   const width = 10
 
-  // Pieces (L,L(flipped),T,Z,Z(reversed),I,O)
+  // Piece (L,L(flipped),T,Z,Z(flipped),I,O)
+  //Rotation 1
+  //Rotation 2
+  //Rotation 3
+  //Rotation 4
 
   const lPiece = [
-    [1, width + 1, width * 2 + 1, 2], //Rotation 1
-    [width, width + 1, width + 2, width * 2 + 2], //Rotation 2
-    [1, width + 1, width * 2 + 1, width * 2], //Rotation 3
-    [width, width * 2, width * 2 + 1, width * 2 + 2] //Rotaion 4
+    [1, width + 1, width * 2 + 1, 2],
+    [width, width + 1, width + 2, width * 2 + 2],
+    [1, width + 1, width * 2 + 1, width * 2],
+    [width, width * 2, width * 2 + 1, width * 2 + 2]
   ]
   const lFlippedPiece = [
-    [0, 1, width + 1, width * 2 + 1], //Rotation 1
-    [width, width + 1, width + 2, 2], //Rotation 2
-    [1, width + 1, width * 2 + 1, width * 2 + 2], //Rotation 3
-    [width, width * 2, width + 1, width + 2] //Rotaion 4
+    [0, 1, width + 1, width * 2 + 1],
+    [width, width + 1, width + 2, 2],
+    [1, width + 1, width * 2 + 1, width * 2 + 2],
+    [width, width * 2, width + 1, width + 2]
   ]
   const tPiece = [
     [1, width, width + 1, width + 2],
@@ -39,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
 
   const iPiece = [
-    [1, width + 1, width * 2 + 1, width * 3 + 1], //Vertical rotaion
-    [width, width + 1, width + 2, width + 3], //Horizontal rotation
-    [1, width + 1, width * 2 + 1, width * 3 + 1], //Vertical rotation
-    [width, width + 1, width + 2, width + 3] //Horizontal rotation
+    [1, width + 1, width * 2 + 1, width * 3 + 1],
+    [width, width + 1, width + 2, width + 3],
+    [1, width + 1, width * 2 + 1, width * 3 + 1],
+    [width, width + 1, width + 2, width + 3]
   ]
 
   const oPiece = [
@@ -82,6 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[currentPosition + index].classList.remove('piece')
     })
   }
+
+  // Register keyboard commands to control current piece
+  // keycodes: 37 - left arrow, 38 - up arrow , 39 - right arrow, 40 - down arrow
+  function control(e) {
+    if (e.keyCode === 37) {
+      slideLeft()
+    } else if (e.keyCode === 38) {
+      rotate()
+    } else if (e.keyCode === 39) {
+      slideRight()
+    } else if (e.keyCode === 40) {
+      moveDown()
+    }
+  }
+  document.addEventListener('keyup', control)
+
   // Falling down the board
   fallingSpeed = setInterval(moveDown, 1000)
 
@@ -91,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     draw()
     stopFalling()
   }
+  // create bottom border to stop falling
 
   function stopFalling() {
     if (
@@ -107,9 +128,23 @@ document.addEventListener('DOMContentLoaded', () => {
       draw()
     }
   }
-  console.log(currentpiece)
   // Lateral movement down the board
+  function slideLeft() {
+    undraw()
+    const leftBorder = currentpiece.some(
+      (index) => (currentPosition + index) % width === 0
+    )
 
+    if (!leftBorder) currentPosition -= 1
+    if (
+      currentpiece.some((index) =>
+        squares[currentPosition + index].classList.contains('taken')
+      )
+    ) {
+      currentPosition -= 1
+    }
+    draw()
+  }
   // Rotating Pieces
 
   // Show the upcoming piece
