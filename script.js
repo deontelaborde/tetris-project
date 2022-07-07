@@ -99,14 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.keyCode === 39) {
       slideRight()
     } else if (e.keyCode === 40) {
-      moveDown()
       score += 1
+      scoreDisplay.innerHTML = score
+      moveDown()
     }
   }
   document.addEventListener('keyup', control)
 
   // Falling down the board
-  fallingSpeed = setInterval(moveDown, 1000)
+  fallingSpeed = setInterval(moveDown, 500)
 
   function moveDown() {
     undraw()
@@ -241,6 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Increase speed gradually with every level increase
   const levelDisplay = document.querySelector('#level')
 
+  function levelUp() {
+    if (score % 100 === 0) {
+      level += 1
+      levelDisplay.innerHTML = level
+      fallingSpeed -= 250
+    }
+  }
+
   // End game when column is full
   function endGame() {
     if (
@@ -251,6 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
       scoreDisplay.innerHTML = 'GAME OVER'
       clearInterval(fallingSpeed)
     }
+    stopFalling()
   }
+  endGame()
   //  Click Play Again to Start Over
 })

@@ -1,3 +1,9 @@
+* {
+  justify-content: center;
+  text-align: center;
+  text-decoration-color: aliceblue;
+}
+
 .container {
   display: flex;
 }
@@ -8,7 +14,8 @@
   flex-wrap: wrap;
   width: 300px;
   height: 600px;
-  background-color: blue;
+border: 2px solid whitesmoke;
+  background-color: black;
 }
 
 .game-board div, #next-peice div{
@@ -29,12 +36,13 @@ display: flex;
 .game-info{
 
 margin-left: 120px;
+text-decoration-color:whitesmoke ;
 }
-.next-piece {
+/* .next-piece {
   
   height: 120px;
   width: 120px;
   flex-wrap: wrap;
   display: flex;
   background-color: blue;
-}
+} */
