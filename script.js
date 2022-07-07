@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
       slideRight()
     } else if (e.keyCode === 40) {
       moveDown()
+      score += 1
     }
   }
   document.addEventListener('keyup', control)
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draw()
       displayPreview()
       addScore()
+      endGame()
     }
   }
   // Lateral movement down the board
@@ -203,8 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  // Clear the rows when full
-
   // Increase Score
   const scoreDisplay = document.querySelector('#score')
   function addScore() {
@@ -223,8 +223,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ]
 
       if (row.every((index) => squares[index].classList.contains('taken'))) {
-        score += 10
+        score += 100
         scoreDisplay.innerHTML = score
+
+        // Clear the rows when full
+
         row.forEach((index) => {
           squares[index].classList.remove('taken')
           squares[index].classList.remove('piece')
@@ -234,11 +237,20 @@ document.addEventListener('DOMContentLoaded', () => {
         squares.forEach((cell) => board.appendChild(cell))
       }
     }
-
-    // Increase speed gradually with every level increase
-    const levelDisplay = document.querySelector('#level')
-    // End game when column is full
-
-    //  Click Play Again to Start Over
   }
+  // Increase speed gradually with every level increase
+  const levelDisplay = document.querySelector('#level')
+
+  // End game when column is full
+  function endGame() {
+    if (
+      currentpiece.some((index) =>
+        squares[currentPosition + index].classList.contains('taken')
+      )
+    ) {
+      scoreDisplay.innerHTML = 'GAME OVER'
+      clearInterval(fallingSpeed)
+    }
+  }
+  //  Click Play Again to Start Over
 })
