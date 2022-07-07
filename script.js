@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const board = document.querySelector('.game-board')
   let squares = Array.from(document.querySelectorAll('.game-board div'))
   const width = 10
+  let nextRandom = 0
 
   // Piece (L,L(flipped),T,Z,Z(flipped),I,O)
   //Rotation 1
@@ -122,10 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
       currentpiece.forEach((index) =>
         squares[currentPosition + index].classList.add('taken')
       )
-      random = Math.floor(Math.random() * gamePieces.length)
+      random = nextRandom
+      nextRandom = Math.floor(Math.random() * gamePieces.length)
       currentpiece = gamePieces[random][currentRotation]
       currentPosition = 4
       draw()
+      displayPreview()
     }
   }
   // Lateral movement down the board
@@ -167,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     undraw()
 
     currentRotation++
-    if (currentRotation === currentPosition.length) {
+    if (currentRotation === currentpiece.length) {
       currentRotation = 0
     }
     currentpiece = gamePieces[random][currentRotation]
@@ -176,19 +179,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Show the upcoming piece
 
-  const displayNextPeice = document.querySelectorAll('#next-piece div')
+  const displayNextPiece = document.querySelectorAll('#next-piece div')
   const displayWidth = 4
   let displayIndex = 0
 
   const upNextPieces = [
-    [1, width + 1, width * 2 + 1, 2], //l piece
-    [0, 1, width + 1, width * 2 + 1], // l (flipped) piece
-    [1, width, width + 1, width + 2], // t piece
-    [0, width, width + 1, width * 2 + 1], // z piece
-    [1, width, width + 1, width * 2], // z (flipped) piece
-    [1, width + 1, width * 2 + 1, width * 3 + 1], // I piece
-    [0, 1, width, width + 1] // O peice
+    [1, displayWidth + 1, displayWidth * 2 + 1, 2], //l piece
+    [0, 1, displayWidth + 1, displayWidth * 2 + 1], // l (flipped) piece
+    [1, displayWidth, displayWidth + 1, displayWidth + 2], // t piece
+    [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], // z piece
+    [1, displayWidth, displayWidth + 1, displayWidth * 2], // z (flipped) piece
+    [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1], // I piece
+    [0, 1, displayWidth, displayWidth + 1] // O peice
   ]
+  function displayPreview() {
+    displayNextPiece.forEach((square) => {
+      square.classList.remove('piece')
+    })
+    upNextPieces[nextRandom].forEach((index) => {
+      displayNextPiece[displayIndex + index].classList.add('piece')
+    })
+  }
 
   // Clear the rows when full
 
