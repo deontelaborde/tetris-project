@@ -11,7 +11,7 @@
   background-color: blue;
 }
 
-.game-board div {
+.game-board div, #next-peice div{
 width: 30px;
 height: 30px;
 

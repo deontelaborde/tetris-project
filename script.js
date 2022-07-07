@@ -176,6 +176,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Show the upcoming piece
 
+  const displayNextPeice = document.querySelectorAll('#next-piece div')
+  const displayWidth = 4
+  let displayIndex = 0
+
+  const upNextPieces = [
+    [1, width + 1, width * 2 + 1, 2], //l piece
+    [0, 1, width + 1, width * 2 + 1], // l (flipped) piece
+    [1, width, width + 1, width + 2], // t piece
+    [0, width, width + 1, width * 2 + 1], // z piece
+    [1, width, width + 1, width * 2], // z (flipped) piece
+    [1, width + 1, width * 2 + 1, width * 3 + 1], // I piece
+    [0, 1, width, width + 1] // O peice
+  ]
+
   // Clear the rows when full
 
   // Increase Score
