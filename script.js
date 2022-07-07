@@ -225,7 +225,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (row.every((index) => squares[index].classList.contains('taken'))) {
         score += 10
         scoreDisplay.innerHTML = score
-        
+        row.forEach((index) => {
+          squares[index].classList.remove('taken')
+          squares[index].classList.remove('piece')
+        })
+        const squaresCleared = squares.splice(i, width)
+        squares = squaresCleared.concat(squares)
+        squares.forEach((cell) => board.appendChild(cell))
+      }
     }
 
     // Increase speed gradually with every level increase
