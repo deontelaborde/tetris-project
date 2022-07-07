@@ -141,11 +141,37 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[currentPosition + index].classList.contains('taken')
       )
     ) {
+      currentPosition += 1
+    }
+    draw()
+  }
+
+  function slideRight() {
+    undraw()
+    const rightBorder = currentpiece.some(
+      (index) => currentPosition + (index % width) === width - 1
+    )
+
+    if (!rightBorder) currentPosition += 1
+    if (
+      currentpiece.some((index) =>
+        squares[currentPosition + index].classList.contains('taken')
+      )
+    ) {
       currentPosition -= 1
     }
     draw()
   }
   // Rotating Pieces
+  function rotate() {
+    undraw()
+
+    currentRotation++
+    if (currentRotation === currentPosition.length) {
+      currentRotation = 0
+    }
+    currentpiece = gamePieces[random][currentRotation]
+  }
 
   // Show the upcoming piece
 
