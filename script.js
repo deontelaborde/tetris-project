@@ -107,11 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
       draw()
     }
   }
-
-  random = Math.floor(Math.random() * gamePieces.length)
-  currentpiece = gamePieces[random][currentRotation]
-  currentPosition = 4
-  draw()
   console.log(currentpiece)
   // Lateral movement down the board
 
