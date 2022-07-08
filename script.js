@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 10
   let nextRandom = 0
   let score = 0
-
+  let gameOver = false
   // Piece (L,L(flipped),T,Z,Z(flipped),I,O)
   //Rotation 1
   //Rotation 2
@@ -126,16 +126,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Register keyboard commands to control current piece
   // keycodes: 37 - left arrow, 38 - up arrow , 39 - right arrow, 40 - down arrow
   function control(e) {
-    if (e.keyCode === 37) {
-      slideLeft()
-    } else if (e.keyCode === 38) {
-      rotate()
-    } else if (e.keyCode === 39) {
-      slideRight()
-    } else if (e.keyCode === 40) {
-      score += 1
-      scoreDisplay.innerHTML = score
-      moveDown()
+    if (gameOver != true) {
+      if (e.keyCode === 37) {
+        slideLeft()
+      } else if (e.keyCode === 38) {
+        rotate()
+      } else if (e.keyCode === 39) {
+        slideRight()
+      } else if (e.keyCode === 40) {
+        score += 1
+        scoreDisplay.innerHTML = score
+        moveDown()
+      }
     }
   }
   document.addEventListener('keyup', control)
@@ -144,11 +146,13 @@ document.addEventListener('DOMContentLoaded', () => {
   fallingSpeed = setInterval(moveDown, 500)
 
   function moveDown() {
-    clearTopArea()
-    undraw()
-    currentPosition += width
-    draw()
-    stopFalling()
+    if (gameOver != true) {
+      clearTopArea()
+      undraw()
+      currentPosition += width
+      draw()
+      stopFalling()
+    }
   }
   // create bottom border to stop falling
 
@@ -226,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const displayNextPiece = document.querySelectorAll('.next-piece div')
   const displayWidth = 4
-  const displayIndex = 0
+  let displayIndex = 0
 
   const upNextPieces = [
     [1, displayWidth + 1, displayWidth * 2 + 1, 2], //l piece
@@ -239,10 +243,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
   function displayPreview() {
     displayNextPiece.forEach((square) => {
-      square.classList.remove('piece')
+      square.classList.remove('piece', randomColor)
     })
     upNextPieces[nextRandom].forEach((index) => {
-      displayNextPiece[displayIndex + index].classList.add('piece')
+      displayNextPiece[displayIndex + index].classList.add('piece', randomColor)
     })
   }
 
@@ -279,16 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  // Increase speed gradually with every level increase
-  const levelDisplay = document.querySelector('#level')
-
-  function levelUp() {
-    if (score % 100 === 0) {
-      level += 1
-      levelDisplay.innerHTML = level
-      fallingSpeed -= 250
-    }
-  }
 
   // End game when column is full
   function endGame() {
@@ -297,7 +291,9 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[currentPosition + index].classList.contains('taken')
       )
     ) {
-      scoreDisplay.innerHTML = 'GAME OVER'
+      gameOver = true
+      const message = document.querySelector('#message')
+      message.innerHTML = 'GAME OVER'
       clearInterval(fallingSpeed)
     }
     stopFalling()
