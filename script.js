@@ -226,30 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     draw()
   }
 
-  // Show the upcoming piece
-
-  const displayNextPiece = document.querySelectorAll('.next-piece div')
-  const displayWidth = 4
-  let displayIndex = 0
-
-  const upNextPieces = [
-    [1, displayWidth + 1, displayWidth * 2 + 1, 2], //l piece
-    [0, 1, displayWidth + 1, displayWidth * 2 + 1], // l (flipped) piece
-    [1, displayWidth, displayWidth + 1, displayWidth + 2], // t piece
-    [0, displayWidth, displayWidth + 1, displayWidth * 2 + 1], // z piece
-    [1, displayWidth, displayWidth + 1, displayWidth * 2], // z (flipped) piece
-    [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1], // I piece
-    [0, 1, displayWidth, displayWidth + 1] // O peice
-  ]
-  function displayPreview() {
-    displayNextPiece.forEach((square) => {
-      square.classList.remove('piece', randomColor)
-    })
-    upNextPieces[nextRandom].forEach((index) => {
-      displayNextPiece[displayIndex + index].classList.add('piece', randomColor)
-    })
-  }
-
   // Increase Score
   const scoreDisplay = document.querySelector('#score')
   function addScore() {
