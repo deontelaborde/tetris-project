@@ -30,6 +30,10 @@ Rules:
 - Completing rows to increase your score and keep your pile down.
   - Failure to do so results in game over and you can try again.
 
+### **_Deploy Game_**
+
+[Launch](deontes-tetris.surge.sh)
+
 ---
 
 ### **Trello Board**
