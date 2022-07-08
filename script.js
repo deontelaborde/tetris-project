@@ -68,6 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
     oPiece
   ]
 
+  // Random colors for each piece
+
+  let randomColor
+  function colorPiece() {
+    const pieceColors = [
+      'red',
+      'yellow',
+      'blue',
+      'orange',
+      'green',
+      'purple',
+      'pink'
+    ]
+    const chooseRandomColor = Math.floor(Math.random() * pieceColors.length)
+    randomColor = pieceColors[chooseRandomColor]
+  }
+  colorPiece()
+
   //Selecting Random Pieces
 
   let currentPosition = 4
@@ -78,14 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function draw() {
     currentpiece.forEach((index) => {
-      squares[currentPosition + index].classList.add('piece')
+      squares[currentPosition + index].classList.add('piece', randomColor)
     })
   }
   draw()
 
   function undraw() {
     currentpiece.forEach((index) => {
-      squares[currentPosition + index].classList.remove('piece')
+      squares[currentPosition + index].classList.remove('piece', randomColor)
     })
   }
 
@@ -126,6 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
       currentpiece.forEach((index) =>
         squares[currentPosition + index].classList.add('taken')
       )
+      //Start new piece
+      colorPiece()
       random = nextRandom
       nextRandom = Math.floor(Math.random() * gamePieces.length)
       currentpiece = gamePieces[random][currentRotation]

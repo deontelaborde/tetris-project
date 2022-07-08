@@ -18,15 +18,36 @@ border: 2px solid whitesmoke;
   background-color: black;
 }
 
+.green {
+  background-color: green;
+}
+.blue {
+  background-color: blue;
+}
+.red{
+  background-color: red
+}
+.pink {
+  background-color: pink;
+}
+.purple {
+  background-color: purple;
+}
+.orange {
+  background-color: orange;
+}
+.yellow {
+  background-color: yellow;
+}
 .game-board div, #next-peice div{
 width: 30px;
 height: 30px;
 
 }
 
-.piece, .next-piece .piece{
+/* .piece, .next-piece .piece{
   background-color: green;
-}
+} */
 
 section {
 display: flex;
@@ -46,3 +67,4 @@ text-decoration-color:whitesmoke ;
   display: flex;
   background-color: blue;
 } */
+
