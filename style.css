@@ -88,11 +88,6 @@ width: 30px;
 height: 30px;
 
 }
-
-/* .piece, .next-piece .piece{
-  background-color: green;
-} */
-
 section {
 display: flex;
 
@@ -103,13 +98,3 @@ display: flex;
 margin-left: 120px;
 text-decoration-color:whitesmoke ;
 }
-/* .next-piece {
-  
-  height: 120px;
-  width: 120px;
-  flex-wrap: wrap;
-  display: flex;
-  background-color: black;
-} 
- */
-
