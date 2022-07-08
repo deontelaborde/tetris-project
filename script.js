@@ -85,7 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
     randomColor = pieceColors[chooseRandomColor]
   }
   colorPiece()
-
+  function clearTopArea() {
+    squares.forEach((index) => {
+      squares.forEach((item, index) => {
+        if (!squares[index].classList.contains('taken')) {
+          squares[index].classList.remove(
+            'green',
+            'blue',
+            'orange',
+            'yellow',
+            'purple',
+            'red',
+            'pink'
+          )
+        }
+      })
+    })
+  }
   //Selecting Random Pieces
 
   let currentPosition = 4
@@ -128,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fallingSpeed = setInterval(moveDown, 500)
 
   function moveDown() {
+    clearTopArea()
     undraw()
     currentPosition += width
     draw()
@@ -158,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Lateral movement down the board
   function slideLeft() {
+    clearTopArea()
     undraw()
     const leftBorder = currentpiece.some(
       (index) => (currentPosition + index) % width === 0
@@ -175,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function slideRight() {
+    clearTopArea()
     undraw()
     const rightBorder = currentpiece.some(
       (index) => currentPosition + (index % width) === width - 1
@@ -192,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Rotating Pieces
   function rotate() {
+    clearTopArea()
     undraw()
 
     currentRotation++
