@@ -46,7 +46,7 @@ h3 {
   
 }
 
-a:link {
+a:link {  /* Cite: https://blog.hubspot.com/website/remove-underline-from-links-css */
   text-decoration: none;
   font-size: 2rem;
 }

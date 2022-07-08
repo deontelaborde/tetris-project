@@ -280,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const squaresCleared = squares.splice(i, width)
         squares = squaresCleared.concat(squares)
         squares.forEach((cell) => board.appendChild(cell))
+        clearTopArea()
       }
     }
   }
@@ -300,3 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   endGame()
 })
+
+// Sources
+// This code was inspired by the tutorial of coding JavaScript
+// by Ania Kubow
+
+//https://selftaughttxg.com/2022/03-22/Ania_Kubow-Tetris/
